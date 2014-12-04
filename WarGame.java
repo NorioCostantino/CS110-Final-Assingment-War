@@ -21,8 +21,8 @@ public class WarGame
    private String winner;
    
    //The two cards that are being compared
-   private Card card1;
-   private Card card2;
+   public Card card1;
+   public Card card2;
      
    /**Constructor of WarGame. Create game with 2 piles, make a new deck, shuffle it and split in half to make 2 card piles. 
    */ 
@@ -268,6 +268,24 @@ public class WarGame
       return player2Pile.size();
    }
 
+   /**
+   Get rank of card drawn by player 1
+   @return player 1 drawn card rank
+   */
+   public int getCard1Rank()
+   {
+      return card1.getRank();
+   }
 
+   /**
+   Get rank of card drawn by player 2
+   @return player 2 drawn card rank
+   */
+   public int getcard2Rank()
+   {
+      return card2.getRank();
+   }
+   
+   
 }
 

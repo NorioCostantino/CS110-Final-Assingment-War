@@ -63,22 +63,22 @@ public class Card
     
       switch (suit)
       {
-         case SPADES: suitString = "Spades";
+         case SPADES: suitString = "s";
          break;
          
-         case CLUBS: suitString = "Clubs";
+         case CLUBS: suitString = "c";
          break;
          
-         case HEARTS: suitString = "Hearts";
+         case HEARTS: suitString = "h";
          break;
          
-         case DIAMONDS: suitString = "Diamonds";
+         case DIAMONDS: suitString = "d";
          break;
       }
          
       switch (rank)
       {
-         case 1: valueString = "Ace";
+         case 1: valueString = "ace";
          break;
          
          case 2: valueString = "2";
@@ -108,17 +108,17 @@ public class Card
          case 10: valueString = "10";
          break;
          
-         case 11: valueString = "Jack";
+         case 11: valueString = "jack";
          break;
          
-         case 12: valueString = "Queen";
+         case 12: valueString = "queen";
          break;
          
-         case 13: valueString = "King";
+         case 13: valueString = "king";
          break; 
       }
       
-      String totalString = valueString + " of " + suitString; //combining the results
+      String totalString = valueString + suitString; //combining the results
       return totalString;
    
    }   
@@ -145,28 +145,15 @@ public class Card
       return equality;
    }
    
-   /** The isGreater method shows if this card is greater than another card
-   @param otherCard is the card being compared
-   @return true if this card is greater, false if they are not */
-   public Boolean isGreater(Card otherCard)
+   /**
+   Get the image of the card for the gui
+   @return a string with the card file name
+   */
+   public String getImage()
    {
-      Boolean greater;                 
+      String cardString = this.toString()+ ".jpg";
       
-      int card1value = rank;   
-      int card2value = otherCard.getRank();
-      
-      if (card1value > card2value)
-      {
-         greater = true;
-      }
-      
-      else
-      {
-         greater = false;
-      }   
-      
-      return greater;
-   }  
-   
+      return cardString;
+   }
 } 
 
