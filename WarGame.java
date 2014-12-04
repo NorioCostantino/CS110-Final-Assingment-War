@@ -54,7 +54,7 @@ public class WarGame
       }
       
    }
-   /**Play a round of war
+   /**Play a round of War Game
    */
    public void playRound()
    {
@@ -78,12 +78,9 @@ public class WarGame
          pot.add(card1);
          pot.add(card2);
          
-         //Find the winner of the round
-         this.findWinner();
-      
-         //Give the winner the pot of cards
-         this.claimWinner();
-      } 
+          //Find the winner of the round
+          this.findWinner();
+      }
    }   
    
    /** Find the winner of the round or game. winner will be modified.
@@ -134,86 +131,26 @@ public class WarGame
       {
          winner = "player2";
       }
+
    }
 
 
    /**
-   If there is a tie, go to war. Winner will be modified.
+   If there is a tie, go to war. War simply adds a new card to the pot which is not compared. 
    */
    public void war()
    { 
       //The two facedown cards
       Card temp1;
       Card temp2;
+     
+      //Take a card from each hand face down
+      temp1 = player1Pile.draw();
+      temp2 = player2Pile.draw();
       
-      if(player1Pile.size() == 0) 
-      {
-         winner = "finalWinnerPlayer1";
-      }
-      
-      else if(player2Pile.size() == 0) 
-      {
-         winner = "finalWinnerPlayer2";
-      }      
-      
-      else
-      {
-         //Take a card from each hand facce down
-         temp1 = player1Pile.draw();
-         temp2 = player2Pile.draw();
-      
-         //Add temp cards to the pot
-         pot.add(temp1);
-         pot.add(temp2);
-
-         //if the cards are still equal, go into a loop
-         while(card1.getRank() == card2.getRank())
-         {
-            
-            //Check if there are cards left in the piles
-            if(player1Pile.size() == 0) 
-            {
-               winner = "finalWinnerPlayer1";
-            }
-      
-            else if(player2Pile.size() == 0) 
-            {
-               winner = "finalWinnerPlayer2";
-            }   
-            
-            else
-            {
-               //Take a card from each hand face down
-               temp1 = player1Pile.draw();
-               temp2 = player2Pile.draw();
-         
-               //Check again to see if piles are empty
-               if(player1Pile.size() == 0) 
-               {
-                  winner = "finalWinnerPlayer1";
-               }
-      
-               else if(player2Pile.size() == 0) 
-               {
-                  winner = "finalWinnerPlayer2";
-               }                 
-   
-               //Draw two cards to compare again
-               card1 = player1Pile.draw();
-               card2 = player2Pile.draw();
-            
-               //Add all four cards to the pot
-               pot.add(temp1);
-               pot.add(temp2);
-               pot.add(card1);
-               pot.add(card2);
-            }
-            
-         }
-      }
-      
-      //Now that the ranks are uneven, find the winner
-      this.findWinner(); 
+      //Add temp cards to the pot
+      pot.add(temp1);
+      pot.add(temp2);
    }
       
    /**claimWinner adds the won cards in the pot to the winner's hand and then empties the pot
@@ -285,7 +222,5 @@ public class WarGame
    {
       return card2.getRank();
    }
-   
-   
 }
 

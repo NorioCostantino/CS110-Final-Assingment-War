@@ -15,7 +15,8 @@ public class WarGameGUI extends JFrame
    private JPanel p1Pile, p2Pile;
    private JPanel p1Play, p2Play;
    
-   private JButton button;             //One button to go
+   private JButton goButton;           //Normal round go button
+   private JButton warButton;          //Button that starts a war
    
    private JPanel status;              //status bar at the bottom 
    
@@ -33,6 +34,9 @@ public class WarGameGUI extends JFrame
    
    private JPanel gamePanel; 
    
+   /**
+   The main gui for the war game
+   */
    public WarGameGUI()
    {
       //Start new game
@@ -112,19 +116,25 @@ public class WarGameGUI extends JFrame
       c.gridx = 3;
       add(cardsInPile2,c);
 
-      //The button
-      button = new JButton();
-      button.setEnabled(true);
-      button.setText("Go");
-      button.addActionListener(new ButtonListener());
+      //The goButton
+      goButton = new JButton();
+      goButton.setEnabled(true);
+      goButton.setText("Go");
+      goButton.addActionListener(new goButton());
       
       c.gridwidth = 2;
       c.fill = GridBagConstraints.HORIZONTAL;
       c.gridx = 1;
       c.gridy = 3;
       c.ipady = 0;
-      add(button,c);
-                  
+      add(goButton,c);
+      
+      //Initilize the War button
+      warButton = new JButton();
+      warButton.setEnabled(false);
+      warButton.setText("War!");
+      warButton.addActionListener(new warButton());
+      //add(warButton,c);
        
       //The status panel
       status = new JPanel();
@@ -137,9 +147,9 @@ public class WarGameGUI extends JFrame
       add(status,c);
 
    }
-   /**Handling button press
+   /**Handling the goButton
    */
-   private class ButtonListener implements ActionListener
+   private class goButton implements ActionListener
    {
       public void actionPerformed(ActionEvent e)
       {     
@@ -148,52 +158,106 @@ public class WarGameGUI extends JFrame
          //play a round
          game.playRound();
          
-         //Reaction to round
          //display cards drawn
          ImageIcon play1Icon = new ImageIcon(game.card1.getImage());
          ImageIcon play2Icon = new ImageIcon(game.card2.getImage());
          player1PlayLabel.setIcon(play1Icon);
          player2PlayLabel.setIcon(play2Icon);
-         
+
+         //Check if someone won
+         if (game.getWinner().equals("finalPlayer1Winner") )
+         {
+            statusLabel.setText("Player 1 Wins the Game!");
+            goButton.setEnabled(false);  
+         }
+
+         else if (game.getWinner().equals("finalPlayer2Winner"))
+         {
+            statusLabel.setText("Player 2 Wins the Game!");
+            goButton.setEnabled(false);
+         }
+
           //Check for a war
          if (game.getWinner().equals("war"))
          {
-            game.war();
-            statusLabel.setText("War!");
+            statusLabel.setText("It's a tie!");
+            
+            //Enable war button, disable normal button
+            warButton.setEnabled(true);
+            
+            GridBagConstraints c = new GridBagConstraints();
+            c.gridwidth = 2;
+            c.fill = GridBagConstraints.HORIZONTAL;
+            c.gridx = 1;
+            c.gridy = 3;
+            c.ipady = 0;
+            
+            remove(goButton);
+            add(warButton,c);
+            revalidate();
+            repaint();
+            goButton.setEnabled(false);
+            
          }
          
          //Check to see who won       
-         if (game.getWinner().equals("player1"))
+         else if (game.getWinner().equals("player1"))
          {
             statusLabel.setText("Player 1 Wins the Round!");
             
             //Change the number of cards left
             cardsInPile1Label.setText(game.getPlayer1PileSize() + " cards left");
             cardsInPile2Label.setText(game.getPlayer2PileSize() + " cards left");
+            game.claimWinner();
          }
             
          else if (game.getWinner().equals("player2"))
          {
             statusLabel.setText("Player 2 Wins the Round!");
+           
             //Change the number of cards left
             cardsInPile1Label.setText(game.getPlayer1PileSize() + " cards left");
             cardsInPile2Label.setText(game.getPlayer2PileSize() + " cards left");
+            game.claimWinner();
          }   
+
+     }   
+   }  
+   /**Handle the war button
+   */
+     
+   private class warButton implements ActionListener
+   {
+      public void actionPerformed(ActionEvent e)
+      {     
+         //Display card backs
+         ImageIcon play1Icon = new ImageIcon("back.jpg");
+         ImageIcon play2Icon = new ImageIcon("back.jpg");
+         player1PlayLabel.setIcon(play1Icon);
+         player2PlayLabel.setIcon(play2Icon);
          
-         //check if someone won
-         if (game.getWinner().equals("finalPlayer1Winner") )
-         {
-            statusLabel.setText("Player 1 Wins the Game!");
-            button.setEnabled(false);  
-         }
+         statusLabel.setText("War!");   
+              
+         //Enter war method
+         game.war();
 
-         else if (game.getWinner().equals("finalPlayer2Winner"))
-         {
-            statusLabel.setText("Player 2 Wins the Game!");
-            button.setEnabled(false);
-         }
-     }       
-
-   }
+         //Enable go button, disable war button
+         goButton.setEnabled(true);
+            
+         GridBagConstraints c = new GridBagConstraints();
+         c.gridwidth = 2;
+         c.fill = GridBagConstraints.HORIZONTAL;
+         c.gridx = 1;
+         c.gridy = 3;
+         c.ipady = 0;
+            
+         remove(warButton);
+         add(goButton,c);
+         revalidate();
+         repaint();
+         warButton.setEnabled(false);
+      }
       
+   }
+  
 } 

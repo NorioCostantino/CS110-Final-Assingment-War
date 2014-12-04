@@ -88,6 +88,7 @@ public class CardPile
    public void empty()
    {
       cardPile.clear();
+      size = 0;
    }
    
    /**Gives the size of the card pile
