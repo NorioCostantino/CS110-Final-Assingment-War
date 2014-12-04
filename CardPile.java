@@ -2,6 +2,8 @@
  CS 110
  Final Assignment CardPile Class*/
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.Collections;
 
 public class CardPile 
 {
@@ -33,6 +35,22 @@ public class CardPile
       cardPile.remove(0);
       size--;   
       return nextCard;
+   }
+   
+   //shuffle the card pile by swapping two random cards in the list a certain number of times.
+   public void shuffle()
+   {
+      int numberOfSwaps = 10000;
+      Random random = new Random();
+      
+      for(int i = 0; i < numberOfSwaps; i++)
+      { 
+         int position1 = random.nextInt(size);
+         int position2 = random.nextInt(size);
+         
+         //swap positions in the arraylist
+         Collections.swap(cardPile,position1,position2);
+      }  
    }
    
    //determines whether the card pile has any elements in it
