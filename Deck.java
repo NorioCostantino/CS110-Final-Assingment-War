@@ -8,7 +8,7 @@ public class Deck extends CardPile
    The deck is a special card pile with 52 cards that contains every playing card.
    */
    
-   private final NUM_CARDS = 52; //every deck has 52 cards, make this final at the end. 6 for testing purposes
+   private final int NUM_CARDS = 52; //every deck has 52 cards, make this final at the end. 6 for testing purposes
    private Card card;
    
    /**
