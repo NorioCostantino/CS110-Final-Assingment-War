@@ -5,19 +5,22 @@
 public class Deck extends CardPile
 {
    /**
-   A 52 card deck of cards
+   The deck is a special card pile with 52 cards that contains every playing card.
    */
    
-   private final int NUMBER_OF_CARDS = 52; //every deck has 52 cards
+   private final NUM_CARDS = 52; //every deck has 52 cards, make this final at the end. 6 for testing purposes
    private Card card;
-     
+   
+   /**
+   Constructor: create a new deck of 52 cards, a specialized card pile
+   */
    public Deck()
    {
       int suit = 1;  //suits range from 1 to 4
       int rank = 1;  //ranks range from 1 to 13
       
-      //populate the deck
-      for(int i = 0; i < NUMBER_OF_CARDS; i++)
+      //Populate the deck
+      for(int i = 0; i < NUM_CARDS; i++)
       {   
          
          card = new Card(suit, rank);

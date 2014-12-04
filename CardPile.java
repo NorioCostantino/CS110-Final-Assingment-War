@@ -7,28 +7,30 @@ import java.util.Collections;
 
 public class CardPile 
 {
-   /**
-      Collection of cards to draw from, add to etc.
-   */
    
    private ArrayList<Card> cardPile;      //The rraylist of cards
    private int size;                      //size of card pile (how many cards are in the pile)
      
-   //constructor. create card pile of length 0  
+   /**Constructor creates a new cardpile (an arraylist of cards) with size = 0;
+   */
    public CardPile()
    {
       size = 0;
       cardPile = new ArrayList<Card>();
    }
 
-   //Add card to the bottom of the card pile
+   /**Add a card tot he bottom of the card pile
+   @param card is the card being added to the bottom of the pile
+   */
    public void add(Card card)
    {
       cardPile.add(size,card); 
       size++;
    }
    
-   //Draw card from card pile (take off top and shift)
+   /**Draw a card from the pile, removing it from the pile completely
+   @return the top card in the pile
+   */
    public Card draw()
    {
       Card nextCard = cardPile.get(0);
@@ -37,7 +39,19 @@ public class CardPile
       return nextCard;
    }
    
-   //shuffle the card pile by swapping two random cards in the list a certain number of times.
+   /**Get a specific card from teh card pile
+   @param index the index of the card you want to get
+   @return the card at the index specified
+   */
+   public Card get(int index)
+   {
+      Card card = cardPile.get(index);
+      return card;
+   }
+   
+   /**
+   Shuffle the card pile so that the elements are in random order
+   */
    public void shuffle()
    {
       int numberOfSwaps = 10000;
@@ -53,9 +67,9 @@ public class CardPile
       }  
    }
    
-   //determines whether the card pile has any elements in it
-   //@return
-   //@return
+   /**isEmpty determines whether the card pile is empty
+   @return ture if empty, false if not.
+   */
    public boolean isEmpty()
    {
       if (size == 0)
@@ -69,12 +83,17 @@ public class CardPile
       }
    }
    
+   /**Empties out the card pile making it blank
+   */
    public void empty()
    {
       cardPile.clear();
    }
    
-   public int getSize()
+   /**Gives the size of the card pile
+   @return card pile size
+   */
+   public int size()
    {
       return size;
    }
