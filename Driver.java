@@ -10,7 +10,7 @@ public static void main(String [] args)
    {
       JFrame frame = new WarGameGUI();
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      frame.setSize(500,500);
+      frame.setSize(900,900);
       frame.validate();
       frame.setVisible(true);
    }

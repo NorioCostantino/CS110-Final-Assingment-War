@@ -15,11 +15,12 @@ public class WarGameGUI extends JFrame
    private JPanel p1Pile, p2Pile;
    private JPanel p1Play, p2Play;
    
-   private JButton button;                //One button to go
+   private JButton button;             //One button to go
    
-   private JTextPane status;              //status bar at the bottom 
+   private JPanel status;              //status bar at the bottom 
    
-   private JLabel title;                  //Title for top panel
+   private JLabel title;               //Title for top panel
+   private JLabel statusLabel;         //Status text
    private JLabel numberCardsPlayer1, numberCardsPlayer2;
    
    private JLabel playercard1;
@@ -35,16 +36,18 @@ public class WarGameGUI extends JFrame
       //Add the title to the topPanel
       //Set up the top panel
       topPanel = new JPanel();
-      topPanel.setBackground(Color.green);
+      topPanel.setBackground(Color.blue);
       title = new JLabel("Norio's WAR");
-      title.setFont(new Font("HELVETICA",Font.ITALIC,36));
+      
+      title.setFont(new Font("ARIAL",Font.BOLD,24));
       topPanel.add(title);
       
       //Add the test to the status pane to start
-      status = new JTextPane();
-      status.setText("Welcome!");
-      //status.setFont(new Font "HELVETICA",Font.ITALIC,16);
-      
+      status = new JPanel();
+      statusLabel = new JLabel("Welcome!");
+      statusLabel.setFont(new Font ("ARIAL",Font.BOLD,16));
+      status.add(statusLabel);
+
       //Add Button
       button = new JButton();
       button.setEnabled(true);
@@ -52,13 +55,11 @@ public class WarGameGUI extends JFrame
       button.addActionListener(new ButtonListener());
       
       //Labels showing the backs of cards, put all labels on the player piles
-      JLabel player1PlayLabel = new JLabel(new ImageIcon("cardPics(1)\back.jpg"));
-      JLabel player2PlayLabel = new JLabel(new ImageIcon("cardPics(1)\back.jpg"));
+      JLabel player1PlayLabel = new JLabel(new ImageIcon("back.jpg"));
+      JLabel player2PlayLabel = new JLabel(new ImageIcon("back.jpg"));
       
-      JLabel player1PileLabel = new JLabel (new ImageIcon("cardPics(1)\back.jpg"));
-      JLabel player2PileLabel = new JLabel (new ImageIcon("cardPics(1)\back.jpg"));
-      
-      //add labels to each of the panels
+      JLabel player1PileLabel = new JLabel (new ImageIcon("back.jpg"));
+      JLabel player2PileLabel = new JLabel (new ImageIcon("back.jpg"));
       
       
       //setup the game panel panels
@@ -76,10 +77,11 @@ public class WarGameGUI extends JFrame
       
       gamePanel.setBackground(Color.red);
       
-      gamePanel.add(p1Play);
-      gamePanel.add(p2Play);
-      gamePanel.add(p1Pile);
-      gamePanel.add(p2Pile);
+      //Add the backs to each of the buttons
+      gamePanel.add(player1PlayLabel);
+      gamePanel.add(player2PlayLabel);
+      gamePanel.add(player1PileLabel);
+      gamePanel.add(player2PileLabel);
       
       //Add each panel to the overall layout
       add(topPanel);
@@ -102,22 +104,22 @@ public class WarGameGUI extends JFrame
             
          if (game.getWinner().equals("finalPlayer1Winner"))
          {
-            status.setText("Player 1 wins!");
+            statusLabel = new JLabel("Player 1 wins!");
          }
           
          else if (game.getWinner().equals("FinalPlayer2Winner"))
          {
-            status.setText("Player 2 wins!");
+            statusLabel = new JLabel("Player 2 wins!");
          }
                
          else if (game.getWinner().equals("player1"))
          {
-            status.setText("Player 1 Wins the Round!");
+            statusLabel = new JLabel("Player 1 Wins the Round!");
          }
             
          else if (game.getWinner().equals("player2"))
          {
-            status.setText("Player 2 Wins the Round!");
+            statusLabel = new JLabel("Player 2 Wins the Round!");
          }   
       }
               
