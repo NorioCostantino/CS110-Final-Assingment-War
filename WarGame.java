@@ -7,7 +7,7 @@ public class WarGame
    /**
    The main logic of the game.    
    */
-   private Deck deck;               //A new 52 card deck to start the game
+   public Deck deck;               //A new 52 card deck to start the game
    
    
    //The cards available to each player
@@ -97,7 +97,7 @@ public class WarGame
       //Check for war first. If there is a war, keep adding to pot until the ranks are not the same
       if (card1Rank == card2Rank)
       {
-         this.war();
+         winner = "war";
       }
       
       //Aces are written as rank 1 in the card program, however they beat all cards except for a two (house rules!) 
